@@ -1,0 +1,10 @@
+var R=require("../../../../chunks/[turbopack]_runtime.js")("server/app/api/staff/waste-breakdown/route.js")
+R.c("server/chunks/ec7a8_next_3a1d99d1._.js")
+R.c("server/chunks/ec7a8_next-auth_03f60f5d._.js")
+R.c("server/chunks/ec7a8_openid-client_bb883d81._.js")
+R.c("server/chunks/ec7a8_jose_dist_node_cjs_7055f643._.js")
+R.c("server/chunks/ec7a8_098db475._.js")
+R.c("server/chunks/[root-of-the-server]__84b5b529._.js")
+R.c("server/chunks/FWMS__next-internal_server_app_api_staff_waste-breakdown_route_actions_346c0c58.js")
+R.m("[project]/FWMS/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/FWMS/app/api/staff/waste-breakdown/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/FWMS/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/FWMS/app/api/staff/waste-breakdown/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

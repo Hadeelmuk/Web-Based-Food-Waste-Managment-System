@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///D:/CS%20Y3/FYP/FWMS/FWMS/lib/db.ts"],"sourcesContent":["import { PrismaClient } from \"@prisma/client\"\n\n/**\n * Database client singleton.\n * Prevents creating multiple Prisma clients during development hot-reloads.\n */\nconst globalForPrisma = globalThis as unknown as {\n  prisma: PrismaClient | undefined\n}\n\n// Create or reuse existing Prisma client\nexport const db =\n  globalForPrisma.prisma ??\n  new PrismaClient({\n    // Log queries in development for debugging\n    log: process.env.NODE_ENV === \"development\" ? [\"query\", \"error\", \"warn\"] : [\"error\"],\n  })\n\n// Store in global to reuse across hot-reloads (development only)\nif (process.env.NODE_ENV !== \"production\") globalForPrisma.prisma = db\n\n"],"names":[],"mappings":";;;;AAAA;;AAEA;;;CAGC,GACD,MAAM,kBAAkB;AAKjB,MAAM,KACX,gBAAgB,MAAM,IACtB,IAAI,6IAAY,CAAC;IACf,2CAA2C;IAC3C,KAAK,uCAAyC;QAAC;QAAS;QAAS;KAAO,GAAG;AAC7E;AAEF,iEAAiE;AACjE,wCAA2C,gBAAgB,MAAM,GAAG","debugId":null}}]
+}

@@ -1,0 +1,3 @@
+{
+  "/api/staff/waste/[id]/drop/route": "app/api/staff/waste/[id]/drop/route.js"
+}

@@ -1,0 +1,162 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// NOTE: SQLite connector in Prisma does not support enums.
+// All enum-like fields have been converted to String.
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  /// Role of the user: "ADMIN" | "STAFF" | "PARTNER"
+  role          String    @default("STAFF")
+  businessId    String?
+  business      Business? @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  wasteEntries      WasteEntry[]
+  pickupRequests    PickupRequest[]
+  pointsHistory     PointsHistory[]
+  transportCreated  Transportation[] @relation("TransportCreator")
+  transportAssigned Transportation[] @relation("TransportAssigned")
+
+  @@index([email])
+  @@index([businessId])
+}
+
+model Business {
+  id            String       @id @default(cuid())
+  name          String
+  /// Business type: "CAFE" | "RESTAURANT" | "NGO" | "FARM" | "OTHER"
+  type          String
+  address       String?
+  contactPerson String?
+  email         String       @unique
+  phone         String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  users           User[]
+  wasteEntries    WasteEntry[]
+  pickupRequests  PickupRequest[]
+  transportations Transportation[]
+
+  @@index([type])
+  @@index([email])
+}
+
+model WasteEntry {
+  id            String           @id @default(cuid())
+  date          DateTime         @default(now())
+  /// Waste type: "EDIBLE" | "COFFEE_GROUNDS" | "ORGANIC" | "EXPIRED" | "RECYCLABLE" | "PLATE_WASTE"
+  wasteType     String
+  subType       String?
+  quantity      Float            // in kg
+  /// Action type: "DONATE" | "COMPOST" | "FARM" | "REUSE" | "DROPPED"
+  actionType    String
+  destination   String?          // Name of NGO/Farm
+  /// Status: "PENDING" | "AVAILABLE" | "COMPLETED" | "DROPPED"
+  status        String           @default("PENDING")
+  /// Available for: "CHARITY" | "FARMER"
+  availableFor  String?   // determines which portal can see this
+  expiryDate    DateTime?
+  notes         String?
+  loggedById    String
+  loggedBy      User             @relation(fields: [loggedById], references: [id])
+  businessId    String
+  business      Business         @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  pickupRequest   PickupRequest?
+  transportation  Transportation?
+  pointsHistory   PointsHistory?
+
+  @@index([businessId])
+  @@index([loggedById])
+  @@index([date])
+  @@index([wasteType])
+  @@index([status])
+  @@index([availableFor])
+}
+
+model PickupRequest {
+  id              String        @id @default(cuid())
+  requesterId     String
+  requester       User          @relation(fields: [requesterId], references: [id])
+  wasteEntryId    String?       @unique
+  wasteEntry      WasteEntry?   @relation(fields: [wasteEntryId], references: [id])
+  businessId      String        // The business that owns the waste
+  business        Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  requestedDate   DateTime      @default(now())
+  /// Request status: "PENDING" | "APPROVED" | "REJECTED" | "COMPLETED" | "CANCELLED"
+  status          String        @default("PENDING")
+  approvedAt      DateTime?
+  rejectedAt      DateTime?
+  completedAt     DateTime?
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  transportation  Transportation?
+
+  @@index([requesterId])
+  @@index([businessId])
+  @@index([status])
+  @@index([requestedDate])
+}
+
+model Transportation {
+  id              String          @id @default(cuid())
+  wasteEntryId    String?         @unique
+  wasteEntry      WasteEntry?     @relation(fields: [wasteEntryId], references: [id])
+  pickupRequestId String?         @unique
+  pickupRequest   PickupRequest?  @relation(fields: [pickupRequestId], references: [id])
+  businessId      String
+  business        Business        @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  destination     String
+  quantity        Float
+  /// Transport status: "SCHEDULED" | "IN_TRANSIT" | "COMPLETED" | "CANCELLED"
+  status          String          @default("SCHEDULED")
+  scheduledDate   DateTime?
+  scheduledTime   String?
+  completedAt     DateTime?
+  distance        Float?          // in km
+  createdById     String
+  createdBy       User            @relation("TransportCreator", fields: [createdById], references: [id])
+  assignedToId    String?
+  assignedTo      User?           @relation("TransportAssigned", fields: [assignedToId], references: [id])
+  notes           String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([businessId])
+  @@index([status])
+  @@index([scheduledDate])
+}
+
+model PointsHistory {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wasteEntryId String? @unique
+  wasteEntry  WasteEntry? @relation(fields: [wasteEntryId], references: [id])
+  points      Int      // Can be positive or negative
+  reason      String
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
+

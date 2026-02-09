@@ -1,0 +1,3 @@
+{
+  "/api/admin/pickups/[id]/collected/route": "app/api/admin/pickups/[id]/collected/route.js"
+}

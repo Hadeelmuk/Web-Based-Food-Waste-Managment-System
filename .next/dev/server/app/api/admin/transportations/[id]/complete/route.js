@@ -1,0 +1,10 @@
+var R=require("../../../../../../chunks/[turbopack]_runtime.js")("server/app/api/admin/transportations/[id]/complete/route.js")
+R.c("server/chunks/ec7a8_next_4423a2bd._.js")
+R.c("server/chunks/ec7a8_next-auth_03f60f5d._.js")
+R.c("server/chunks/ec7a8_openid-client_bb883d81._.js")
+R.c("server/chunks/ec7a8_jose_dist_node_cjs_7055f643._.js")
+R.c("server/chunks/ec7a8_098db475._.js")
+R.c("server/chunks/[root-of-the-server]__6a0fef41._.js")
+R.c("server/chunks/3d030_server_app_api_admin_transportations_[id]_complete_route_actions_a11ae362.js")
+R.m("[project]/FWMS/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/FWMS/app/api/admin/transportations/[id]/complete/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/FWMS/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/FWMS/app/api/admin/transportations/[id]/complete/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports
