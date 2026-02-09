@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 16, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/FWMS/middleware.ts"],"sourcesContent":["// Lightweight middleware: allow all requests to reach the route handlers.\n// We rely on the per-route x-user-id guards in /api/_auth instead of NextAuth.\nimport { NextResponse } from \"next/server\"\n\nexport function middleware() {\n  return NextResponse.next()\n}\n\nexport const config = {\n  matcher: [\n    \"/((?!_next/static|_next/image|favicon.ico|.*\\\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)\",\n  ],\n}\n"],"names":[],"mappings":"AAAA,0EAA0E;AAC1E,+EAA+E;;;;;;;AAC/E;AAAA;;AAEO,SAAS;IACd,OAAO,wMAAY,CAAC,IAAI;AAC1B;AAEO,MAAM,SAAS;IACpB,SAAS;QACP;KACD;AACH"}}]
-}

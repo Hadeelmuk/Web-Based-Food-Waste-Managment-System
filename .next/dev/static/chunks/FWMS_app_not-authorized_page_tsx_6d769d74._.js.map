@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/CS%20Y3/FYP/FWMS/FWMS/app/not-authorized/page.tsx"],"sourcesContent":["\"use client\"\r\n\r\nexport default function NotAuthorizedPage() {\r\n  return (\r\n    <div className=\"min-h-screen flex items-center justify-center bg-background px-4\">\r\n      <div className=\"max-w-md text-center space-y-4\">\r\n        <h1 className=\"text-3xl font-display font-bold text-foreground\">Access Denied</h1>\r\n        <p className=\"text-muted-foreground\">\r\n          You do not have permission to view this page. Please log in with an account that has the correct role.\r\n        </p>\r\n        <a\r\n          href=\"/login\"\r\n          className=\"inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 font-medium hover:bg-primary/90\"\r\n        >\r\n          Go to Login\r\n        </a>\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n\r\n"],"names":[],"mappings":";;;;;AAAA;;AAEe,SAAS;IACtB,qBACE,qMAAC;QAAI,WAAU;kBACb,cAAA,qMAAC;YAAI,WAAU;;8BACb,qMAAC;oBAAG,WAAU;8BAAkD;;;;;;8BAChE,qMAAC;oBAAE,WAAU;8BAAwB;;;;;;8BAGrC,qMAAC;oBACC,MAAK;oBACL,WAAU;8BACX;;;;;;;;;;;;;;;;;AAMT;KAjBwB","debugId":null}}]
-}
